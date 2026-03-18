@@ -7,7 +7,7 @@ import configuration from 'config/configuration';
 import { CustomerModule } from './website/customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Customer } from './website/customer/entities/customer.entity';
+import { Customer } from './website/customer/infrastructure/models/customer.entity';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 @Module({
   imports: [

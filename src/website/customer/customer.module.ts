@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CustomerResolver } from './resolvers/customer.resolver';
-import { CustomerService } from './services/customer.service';
+import { CustomerResolver } from './interface/graphql/resolvers/customer.resolver';
+import { CustomerService } from './application/services/customer.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './entities/customer.entity';
+import { Customer } from './infrastructure/models/customer.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Customer])],
   providers: [CustomerResolver, CustomerService],

@@ -1,8 +1,8 @@
 import { Mutation, Query } from '@nestjs/graphql';
 import { Args, ObjectType, Resolver } from '@nestjs/graphql';
 import { CustomerInput } from '../inputs/customer.input';
-import { Customer } from '../entities/customer.entity';
-import { CustomerService } from '../services/customer.service';
+import { Customer } from '../../../infrastructure/models/customer.entity';
+import { CustomerService } from '../../../application/services/customer.service';
 @Resolver()
 export class CustomerResolver {
   constructor(private customerService: CustomerService) {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from '../entities/customer.entity';
-import { CustomerInput } from '../inputs/customer.input';
+import { Customer } from '../../infrastructure/models/customer.entity';
+import { CustomerInput } from '../../interface/graphql/inputs/customer.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
