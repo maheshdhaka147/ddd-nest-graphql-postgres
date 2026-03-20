@@ -6,11 +6,11 @@ export class CustomerInput {
   id: string;
 
   @Field({ nullable: true })
-  firstName?: string;
+  firstName: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+  lastName: string;
 
   @Field({ nullable: true })
-  email?: string;
+  email: string;
 }

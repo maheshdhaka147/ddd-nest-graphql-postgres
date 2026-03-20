@@ -1,31 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Customer } from '../../infrastructure/models/customer.entity';
-import { CustomerInput } from '../../interface/graphql/inputs/customer.input';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
+import { CustomerInput } from '../../presentation/graphql/inputs/customer.input';
+import { CustomerRepository } from '../../infrastructure/repositories/customer.respsitory';
+import { Customer } from '../../domain/customer/customer';
 @Injectable()
 export class CustomerService {
-  constructor(
-    @InjectRepository(Customer)
-    private customerRepository: Repository<Customer>,
-  ) {}
-  async read(input: CustomerInput): Promise<Customer> {
+  constructor(private customerRepository: CustomerRepository) {}
+  async read(input: CustomerInput): Promise<Customer | null> {
     try {
-      const customer = await this.customerRepository.find({
-        where: {
-          id: input.id,
-        },
-      });
-      if (customer.length === 0) throw Error('404 Not Found');
-      return customer[0];
+      const customer = await this.customerRepository.findById(input.id);
+      return customer;
     } catch (error) {
       throw error;
     }
   }
   async create(input: CustomerInput): Promise<Customer> {
-    const custoemr = await this.customerRepository.create(input);
-    const result = await this.customerRepository.save(custoemr);
-    return result;
+    const newCustomer = new Customer(input.id, input.firstName, input.lastName, input.email);
+    const outcome = await this.customerRepository.save(newCustomer);
+    return outcome;
   }
 }

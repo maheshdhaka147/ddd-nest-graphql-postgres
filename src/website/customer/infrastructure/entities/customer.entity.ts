@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 @ObjectType()
-export class Customer {
+export class CustomerEntity {
   @PrimaryColumn()
   @Field()
   id: string;
