@@ -1,10 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { CustomerInput } from '../../presentation/graphql/inputs/customer.input';
-import { CustomerRepository } from '../../infrastructure/repositories/customer.respsitory';
+import { Inject, Injectable } from '@nestjs/common';
+import { CustomerInput } from '../../presentation/graphql/inputs/customer-get.input';
+import { CustomerCreateInput } from '../../presentation/graphql/inputs/customer-create.input';
 import { Customer } from '../../domain/customer/customer';
+import type { ICustomerRepository } from '../../domain/repositories/customer.respsitory.interface';
 @Injectable()
 export class CustomerService {
-  constructor(private customerRepository: CustomerRepository) {}
+  constructor(
+    @Inject('ICustomerRepository')
+    private readonly customerRepository: ICustomerRepository,
+  ) {}
   async read(input: CustomerInput): Promise<Customer | null> {
     try {
       const customer = await this.customerRepository.findById(input.id);
@@ -13,7 +17,7 @@ export class CustomerService {
       throw error;
     }
   }
-  async create(input: CustomerInput): Promise<Customer> {
+  async create(input: CustomerCreateInput): Promise<Customer> {
     try {
       const newCustomer = Customer.create({
         firstName: input.firstName,
