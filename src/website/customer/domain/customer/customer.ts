@@ -1,31 +1,57 @@
+import { v4 as uuidv4 } from 'uuid';
 export class Customer {
-  private id: string;
-  private firstName: string;
-  private lastName: string;
-  private email: string;
-  private isActive: boolean;
-  constructor(id: string, firstName: string, lastName: string, email: string, isActive = false) {
-    this.id = id;
+  private constructor(
+    private readonly id: string,
+    private firstName: string,
+    private lastName: string,
+    private email: string,
+    private isActive: boolean,
+  ) {}
+
+  public static create(props: { firstName: string; lastName: string; email: string }): Customer {
+    return new Customer(uuidv4(), props.firstName, props.lastName, props.email, false);
+  }
+
+  public static reconstitute(props: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    isActive: boolean;
+  }) {
+    return new Customer(props.id, props.firstName, props.lastName, props.email, props.isActive);
+  }
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public getFirstName(): string {
+    return this.firstName;
+  }
+
+  public getLastName(): string {
+    return this.lastName;
+  }
+
+  public getEmail(): string {
+    return this.email;
+  }
+
+  public getActivationStatus(): boolean {
+    return this.isActive;
+  }
+
+  public updateCustomer(firstName: string, lastName: string): void {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = email;
-    this.isActive = isActive;
   }
-  getCustomer() {
-    return {
-      id: this.id,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      isActive: this.isActive,
-    };
+
+  public activate(): void {
+    this.isActive = true;
   }
-  updateCustomer(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-  changeActivationStatus(isActive: boolean) {
-    // Change activation status
-    this.isActive = isActive;
+
+  public deActivate(): void {
+    this.isActive = false;
   }
 }

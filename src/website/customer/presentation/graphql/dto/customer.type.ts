@@ -13,4 +13,7 @@ export class CustomerType {
 
   @Field()
   email: string;
+
+  @Field()
+  isActive: boolean;
 }

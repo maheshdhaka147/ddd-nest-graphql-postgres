@@ -19,4 +19,8 @@ export class CustomerEntity {
   @Column()
   @Field()
   email: string;
+
+  @Column({ nullable: true })
+  @Field()
+  isActive: boolean;
 }

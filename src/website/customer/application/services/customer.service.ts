@@ -14,8 +14,16 @@ export class CustomerService {
     }
   }
   async create(input: CustomerInput): Promise<Customer> {
-    const newCustomer = new Customer(input.id, input.firstName, input.lastName, input.email);
-    const outcome = await this.customerRepository.save(newCustomer);
-    return outcome;
+    try {
+      const newCustomer = Customer.create({
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+      });
+      const outcome = await this.customerRepository.save(newCustomer);
+      return outcome;
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -13,7 +13,7 @@ export class CustomerResolver {
     try {
       let customer = await this.customerService.read(input);
       if (!customer) throw new Error('404 Not Found');
-      return customer.getCustomer();
+      return CustomerViewMapper.toGraphQL(customer);
     } catch (error) {
       throw error;
     }
