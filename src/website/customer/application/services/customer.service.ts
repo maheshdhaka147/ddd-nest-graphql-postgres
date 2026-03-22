@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CustomerInput } from '../../presentation/graphql/inputs/customer-get.input';
 import { CustomerCreateInput } from '../../presentation/graphql/inputs/customer-create.input';
 import { Customer } from '../../domain/customer/customer';
-import type { ICustomerRepository } from '../../domain/repositories/customer.respsitory.interface';
+import type { ICustomerRepository } from '../../domain/repositories/customer.repository.interface';
 @Injectable()
 export class CustomerService {
   constructor(
