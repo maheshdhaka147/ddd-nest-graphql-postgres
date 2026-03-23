@@ -16,7 +16,7 @@ export class CustomerMapper {
     entity.id = domain.getId();
     entity.firstName = domain.getFirstName();
     entity.lastName = domain.getLastName();
-    entity.email = domain.getEmail();
+    entity.email = domain.getEmail().getValue();
     entity.isActive = domain.getActivationStatus();
     return entity;
   }

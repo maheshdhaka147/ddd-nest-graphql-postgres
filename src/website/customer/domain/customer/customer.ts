@@ -1,15 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
+import { Email } from '../value-objects/email.vo';
 export class Customer {
   private constructor(
     private readonly id: string,
     private firstName: string,
     private lastName: string,
-    private email: string,
+    private email: Email,
     private isActive: boolean,
   ) {}
 
   public static create(props: { firstName: string; lastName: string; email: string }): Customer {
-    return new Customer(uuidv4(), props.firstName, props.lastName, props.email, false);
+    const emailVO = Email.create(props.email);
+    return new Customer(uuidv4(), props.firstName, props.lastName, emailVO, false);
   }
 
   public static reconstitute(props: {
@@ -19,7 +21,8 @@ export class Customer {
     email: string;
     isActive: boolean;
   }) {
-    return new Customer(props.id, props.firstName, props.lastName, props.email, props.isActive);
+    const emailVO = Email.create(props.email);
+    return new Customer(props.id, props.firstName, props.lastName, emailVO, props.isActive);
   }
 
   public getId(): string {
@@ -34,7 +37,7 @@ export class Customer {
     return this.lastName;
   }
 
-  public getEmail(): string {
+  public getEmail(): Email {
     return this.email;
   }
 

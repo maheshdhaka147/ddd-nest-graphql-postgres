@@ -3,6 +3,7 @@ import { CustomerInput } from '../../presentation/graphql/inputs/customer-get.in
 import { CustomerCreateInput } from '../../presentation/graphql/inputs/customer-create.input';
 import { Customer } from '../../domain/customer/customer';
 import type { ICustomerRepository } from '../../domain/repositories/customer.repository.interface';
+import { CustomerNotFoundException } from '../../domain/exceptions/customer-not-found.exception';
 @Injectable()
 export class CustomerService {
   constructor(

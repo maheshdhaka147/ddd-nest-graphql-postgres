@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from '../../domain/customer/customer';
 import { CustomerMapper } from '../mapper/customer.mapper';
+import { CustomerNotFoundException } from '../../domain/exceptions/customer-not-found.exception';
 @Injectable()
 export class CustomerRepository {
   constructor(
